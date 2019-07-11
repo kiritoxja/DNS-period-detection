@@ -1,1 +1,1 @@
-# DNS-
+# DNS period detection
