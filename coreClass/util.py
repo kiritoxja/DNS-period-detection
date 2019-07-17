@@ -1,4 +1,10 @@
 
+class Tree :
+    lens = 0 # 字符串长度
+    edges = [] # 中间边的集合
+    host = ''  # 主机IP
+    domain = '' #域名
+
 class Edge:
     pattern = ''   # 后缀树边上的字符串
     current = []   # 出现向量
