@@ -15,6 +15,7 @@ def periodicityDetection(trees, towin, minConfidence):
     for tree in trees:                  #遍历树
         periodCollection = {}
         for edge in tree.edges:         #遍历边
+            has_current_period = []
             if len(edge.pattern) > (tree.lens/2) :
                 continue
             else:
@@ -37,8 +38,8 @@ def periodicityDetection(trees, towin, minConfidence):
 
                     # 初始化候选周期p相关信息
                     p = Period(edge.pattern, diffValue, current[i], len(edge.pattern))
-                    if ('%s_%d')%(p.pattern,p.val)in periodCollection.keys() :
-                        continue
+                    if p.pattern in periodCollection.keys() and p.val in has_current_period :
+                            continue
                     p.foundPosCount = 0
 
                     # 初始化A B C preSubCurValue
@@ -90,7 +91,12 @@ def periodicityDetection(trees, towin, minConfidence):
                         for char in list(p.pattern):
                             pattern_period = pattern_period + float(tree.time2StrDict[char])
                         p.pattern_period = pattern_period
-                        periodCollection[('%s_%d')%(p.pattern,p.val)] = p
+                        if p.pattern in periodCollection.keys():
+                                if p.conf  > periodCollection[p.pattern].conf:
+                                    periodCollection[p.pattern] = p
+                        else :
+                            periodCollection[p.pattern] = p
+                            has_current_period.append(p.val)
 
 
      # 生成结果txt
@@ -98,9 +104,9 @@ def periodicityDetection(trees, towin, minConfidence):
         if periodCollection:
             result = ('%s %s')%(tree.host,tree.domain)
             for pattern in periodCollection.keys():
-                    period_info = (' %s,%d:%d,%f ')%(periodCollection[pattern].pattern,periodCollection[pattern].pattern_period,periodCollection[pattern].avgVal,periodCollection[pattern].conf )
+                    period_info = (' %s,%d:%d,%f ')%(pattern,periodCollection[pattern].pattern_period,periodCollection[pattern].avgVal,periodCollection[pattern].conf )
                     result = result + period_info
-                    print(periodCollection[pattern].pattern)
+                    print(pattern)
                     print(periodCollection[pattern].val)
                     print(periodCollection[pattern].foundPosCount)
                     print(periodCollection[pattern].conf)
@@ -109,8 +115,9 @@ def periodicityDetection(trees, towin, minConfidence):
         f.close()
 
 
-'''
 
+
+'''
 edge1 = Edge('ab',[0,3,6],2)
 edge2 = Edge("abb",[3,6],3)
 
@@ -138,7 +145,6 @@ trees = pk.load(open("E:\\dns_detection\\Trees.pkl","rb+"))
 
 #periodicityDetection([Tree(13,[Edge('a',[0,1,2,4,5,6,7,8,9,10,11,12],1)],"zhuji","domain",{"a":117})],1,0)
 periodicityDetection(trees,1,0.3333)
-
 
 
 
