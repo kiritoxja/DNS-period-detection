@@ -18,7 +18,7 @@ class Edge:
 
 class Period:
 
-    def __init__(self,pattern,val,stops,length,foundPosCount=-1,conf=0,avgVal=0):
+    def __init__(self,pattern,val,stops,length,foundPosCount=-1,conf=0,avgVal=0,pattern_period =0):
         self.pattern = pattern # 周期字符
         self.val = val     # 周期长度
         self.stops = stops    # 当前所指的pattern的起始位置
@@ -26,3 +26,4 @@ class Period:
         self.foundPosCount = foundPosCount # 传说中的count,pattern在整个字符串中出现的字数
         self.conf = conf     # 周期性置信度
         self.avgVal = avgVal   # pattern 的平均周期
+        self.pattern_period = pattern_period #pattern代表的间隔时间
