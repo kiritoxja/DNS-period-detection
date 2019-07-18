@@ -7,6 +7,7 @@ class Node:
         self.parentkey = parentkey
         self.outedges = outedges
         self.suffixlink = suffixlink
+        self.ouccurenceVector = []
         Node.__num__ += 1
         self.id = Node.__num__
 
