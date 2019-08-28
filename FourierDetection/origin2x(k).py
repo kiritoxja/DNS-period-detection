@@ -6,9 +6,10 @@ if __name__ == '__main__':
     filt = 0
     writeList = []
     with open(os.path.join(baseDir, 'processedData', 'FFT_originData.txt')) as fread:
-        with open(os.path.join(baseDir, 'processedData', 'FFT_x(n).pkl'), 'wb') as Objwrite:
+        with open(os.path.join(baseDir, 'processedData', 'FFT_xn.pkl'), 'wb') as Objwrite:
             for line in fread:
                 filt += 1
+                print('filt:',filt)
                 if(filt<=3):
                     continue
                 info = line.split(' ')
@@ -31,6 +32,6 @@ if __name__ == '__main__':
                         k+=1
                     xn.append(tempCount)
                 writeList.append(xn)
-                print(str(filt) + '/444')
+                print(str(filt) + '/372')
             pickle.dump(writeList,Objwrite)
 
