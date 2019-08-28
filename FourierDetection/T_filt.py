@@ -29,7 +29,7 @@ def filt(candidatePeriods:list,intervalList:list):
     #开始T检验
     for candidatePeriod in candidatePeriods:
         for intervalGroup in intervals:
-            if stats.ttest_1samp(intervalGroup, candidatePeriod).pvalue >=0.05:
+            if stats.ttest_1samp(intervalGroup, candidatePeriod).pvalue >=0.001:
                 result.append(candidatePeriod)
                 break
 
@@ -53,13 +53,14 @@ if __name__ == '__main__':
                     host = info1[0]
                     domain = info1[1]
                     intervalList = [int(i)/1000000 for i in info1[2:]]
-                    candidatePeriods = [int(i) for i in info2[2:]]
+                    candidatePeriods = [float(i) for i in info2[3:]]
                     result = filt(candidatePeriods, intervalList)
+                    count += 1
+                    print(str(count) + '/372')
                     if(len(result) == 0):
                         continue
                     writeStr = host + ' ' + domain + ' '
                     writeStr += ' '.join([str(i) for i in result])
                     writeStr += '\n'
                     fwrite.write(writeStr)
-                    count += 1
-                    print(str(count)+'/436')
+
