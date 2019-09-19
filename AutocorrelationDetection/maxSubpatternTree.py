@@ -250,8 +250,8 @@ def maxSubpattern(originString,P,threshold):
                 else:
                     b.append('[')
                     for j in i:
-                        b.append(',')
                         b.append(j)
+                        b.append(',')
                     b.pop()
                     b.append(']')
             patterns[''.join(b)] = frequent/m

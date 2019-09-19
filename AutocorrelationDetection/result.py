@@ -1,4 +1,5 @@
 #读入分割字符串数据   产生 模式：置信度 结果
+#result文件只考虑了通配符占了一半以下的周期模式
 
 import AutocorrelationDetection.candidate as candidate
 import AutocorrelationDetection.maxSubpatternTree as maxSubpatternTree

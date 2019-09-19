@@ -4,10 +4,10 @@ import WARPDetection.WARPCofidence as Confidence
 
 
 if __name__ == '__main__':
-    confidenceThreshold = 0.8
+    confidenceThreshold = 0
     baseDir = os.path.dirname(os.getcwd())
     with open(os.path.join(baseDir,'processedData','intervalToStr.txt')) as fread:
-        with open(os.path.join(baseDir,'processedData','WARP_result.txt'),'a') as fwrite:
+        with open(os.path.join(baseDir,'processedData','WARP_result_new.txt'),'a') as fwrite:
             for line in fread:
                 info = line.split(' ')
                 host = info[0]
