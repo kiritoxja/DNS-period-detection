@@ -29,7 +29,7 @@ def filt(candidatePeriods:list,intervalList:list):
     #开始T检验
     for candidatePeriod in candidatePeriods:
         for intervalGroup in intervals:
-            if stats.ttest_1samp(intervalGroup, candidatePeriod).pvalue >=0.001:
+            if stats.ttest_1samp(intervalGroup, candidatePeriod).pvalue >= 0.001:
                 result.append(candidatePeriod)
                 break
 
